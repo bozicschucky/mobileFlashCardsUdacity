@@ -15,6 +15,7 @@ import {store} from './src/store';
 import HomeScreen from './src/screens/HomeScreen';
 import DeckDetails from './src/screens/DeckDetails';
 import NewCard from './src/screens/NewCard';
+import NewDeck from './src/screens/NewDeck';
 
 const Stack = createNativeStackNavigator();
 
@@ -49,6 +50,11 @@ const App = () => {
             name="NewCard"
             component={NewCard}
             options={{title: 'Add Card'}}
+          />
+          <Stack.Screen
+            name="NewDeck"
+            component={NewDeck}
+            options={{title: 'Add New Deck'}}
           />
         </Stack.Navigator>
       </NavigationContainer>
