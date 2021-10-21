@@ -47,6 +47,10 @@ const appSlice = createSlice({
         questions: [],
       };
     },
+    DELETE_DECK: (state, action) => {
+      const {title} = action.payload;
+      delete state.decks[title];
+    },
   },
 });
 
