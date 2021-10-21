@@ -8,12 +8,13 @@
 
 import React from 'react';
 import type {Node} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
+import HomeScreen from './src/screens/HomeScreen';
 
 const App: () => Node = () => {
   return (
     <View>
-      <Text>App running</Text>
+      <HomeScreen />
     </View>
   );
 };
