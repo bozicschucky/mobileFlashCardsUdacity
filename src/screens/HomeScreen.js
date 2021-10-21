@@ -1,13 +1,6 @@
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {
-  View,
-  Text,
-  StatusBar,
-  StyleSheet,
-  Button,
-  TouchableHighlight,
-} from 'react-native';
+import {View, StyleSheet, Button} from 'react-native';
 import Deck from '../components/Deck';
 
 export default function HomeScreen({navigation}) {
@@ -16,9 +9,16 @@ export default function HomeScreen({navigation}) {
   const handleDeckNavigation = deck => {
     navigation.navigate('DeckDetails', {title: deck});
   };
+
+  const handleAddNewDeck = () => {
+    navigation.navigate('NewDeck');
+  };
   return (
     <View>
       <View style={styles.decksContainer}>
+        <View style={styles.button}>
+          <Button title="Add Deck" onPress={handleAddNewDeck} />
+        </View>
         {decks.map((deck, index) => (
           <Deck
             key={index}
@@ -37,6 +37,11 @@ const styles = StyleSheet.create({
     backgroundColor: 'purple',
     height: 50,
   },
+  button: {
+    marginTop: 10,
+    marginBottom: 10,
+  },
+
   statusTitle: {
     color: 'white',
     fontSize: 20,

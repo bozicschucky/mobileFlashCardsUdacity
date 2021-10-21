@@ -40,6 +40,13 @@ const appSlice = createSlice({
         questions: [...state.decks[title].questions, {question, answer}],
       };
     },
+    ADD_NEW_DECK: (state, action) => {
+      const {title} = action.payload;
+      state.decks[title] = {
+        title,
+        questions: [],
+      };
+    },
   },
 });
 
