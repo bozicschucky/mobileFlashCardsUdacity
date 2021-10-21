@@ -7,15 +7,42 @@
  */
 
 import React from 'react';
-import type {Node} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet} from 'react-native';
 import HomeScreen from './src/screens/HomeScreen';
+import DeckList from './src/screens/DeckList';
+import {NavigationContainer, Button} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-const App: () => Node = () => {
+const Stack = createNativeStackNavigator();
+
+const ScreenHeaderStyles = {
+  headerStyle: {
+    backgroundColor: '#ed2c2c',
+  },
+  headerTintColor: '#fff',
+  headerTitleStyle: {
+    fontWeight: 'bold',
+  },
+};
+
+const App = () => {
   return (
-    <View>
-      <HomeScreen />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName="Home"
+        screenOptions={ScreenHeaderStyles}>
+        <Stack.Screen
+          name="Decks"
+          component={HomeScreen}
+          options={{title: 'Decks'}}
+        />
+        <Stack.Screen
+          name="DeckList"
+          component={DeckList}
+          options={{title: 'DeckList'}}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 

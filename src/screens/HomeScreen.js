@@ -34,24 +34,21 @@ const DECKS = {
     ],
   },
 };
-export default function HomeScreen() {
+export default function HomeScreen({navigation}) {
   const decks = Object.values(DECKS);
+  const handleDeckNavigation = deck => {
+    navigation.navigate('DeckList', {title: deck.title});
+    console.log('the deck -->', deck);
+  };
   return (
     <View>
-      {/* <Header /> */}
-      <View style={styles.statusBarContainer}>
-        <StatusBar animated={true} backgroundColor="purple" />
-        <View style={styles.buttonsContainer}>
-          <Text>Back</Text>
-          <Text style={styles.statusTitle}>Decks</Text>
-        </View>
-      </View>
       <View style={styles.decksContainer}>
         {decks.map((deck, index) => (
           <Deck
             key={index}
             name={deck.title}
             cardsNumber={deck.questions.length}
+            handleDeckNavigation={() => handleDeckNavigation(deck.title)}
           />
         ))}
       </View>

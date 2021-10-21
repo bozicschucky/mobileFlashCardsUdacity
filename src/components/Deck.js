@@ -5,7 +5,7 @@ export default function Deck(props) {
   return (
     <TouchableHighlight
       onPress={() => {
-        console.log('Deck pressed', props.name);
+        props.handleDeckNavigation(props.name);
       }}>
       <View style={styles.container}>
         <Text style={styles.text}>{props.name}</Text>
