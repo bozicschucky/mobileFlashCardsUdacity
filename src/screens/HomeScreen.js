@@ -1,11 +1,17 @@
 import React from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {View, StyleSheet, Button} from 'react-native';
+import {useSelector} from 'react-redux';
+import {View, StyleSheet, Button, FlatList} from 'react-native';
 import Deck from '../components/Deck';
 
 export default function HomeScreen({navigation}) {
   const DECKS = useSelector(state => state.decks);
   const decks = Object.values(DECKS);
+
+  const formattedDecksData = decks.map(deck => ({
+    ...deck,
+    title: deck.title,
+    id: Math.random().toString(36),
+  }));
   const handleDeckNavigation = deck => {
     navigation.navigate('DeckDetails', {title: deck});
   };
@@ -13,20 +19,21 @@ export default function HomeScreen({navigation}) {
   const handleAddNewDeck = () => {
     navigation.navigate('NewDeck');
   };
+  const renderDeck = ({item}) => (
+    <Deck
+      key={item.id}
+      name={item.title}
+      cardsNumber={item.questions.length}
+      handleDeckNavigation={() => handleDeckNavigation(item.title)}
+    />
+  );
   return (
     <View>
       <View style={styles.decksContainer}>
         <View style={styles.button}>
           <Button title="Add Deck" onPress={handleAddNewDeck} />
         </View>
-        {decks.map((deck, index) => (
-          <Deck
-            key={index}
-            name={deck.title}
-            cardsNumber={deck.questions.length}
-            handleDeckNavigation={() => handleDeckNavigation(deck.title)}
-          />
-        ))}
+        <FlatList data={formattedDecksData} renderItem={renderDeck} />
       </View>
     </View>
   );
@@ -57,10 +64,8 @@ const styles = StyleSheet.create({
     paddingRight: 40,
   },
   decksContainer: {
-    // backgroundColor: 'yellow',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    // flex: 1,
   },
 });
