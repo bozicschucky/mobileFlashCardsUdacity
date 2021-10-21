@@ -13,7 +13,8 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {Provider} from 'react-redux';
 import {store} from './src/store';
 import HomeScreen from './src/screens/HomeScreen';
-import DeckList from './src/screens/DeckList';
+import DeckDetails from './src/screens/DeckDetails';
+import NewCard from './src/screens/NewCard';
 
 const Stack = createNativeStackNavigator();
 
@@ -32,7 +33,7 @@ const App = () => {
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="Home"
+          initialRouteName="Decks"
           screenOptions={ScreenHeaderStyles}>
           <Stack.Screen
             name="Decks"
@@ -40,9 +41,14 @@ const App = () => {
             options={{title: 'Decks'}}
           />
           <Stack.Screen
-            name="DeckList"
-            component={DeckList}
-            options={{title: 'DeckList'}}
+            name="DeckDetails"
+            component={DeckDetails}
+            options={{title: 'Deck Details'}}
+          />
+          <Stack.Screen
+            name="NewCard"
+            component={NewCard}
+            options={{title: 'Add Card'}}
           />
         </Stack.Navigator>
       </NavigationContainer>
