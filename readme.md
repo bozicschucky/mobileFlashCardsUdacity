@@ -20,4 +20,11 @@ This project encompasses the fundamental aspects of building a native applicatio
 - Run `npm run android` or `yarn android`
 - The app will open up in emulator if the development environment is set-up locally.
 
-N.B. The app is built for the Android platform.
+## Dependencies
+
+- [React Native](https://facebook.github.io/react-native/)
+- [React Navigation](https://reactnavigation.org/)
+- [Redux](https://redux.js.org/)
+- [Redux ToolKit](https://redux-toolkit.js.org/)
+
+N.B. The app is built and tested on the Android platform.
