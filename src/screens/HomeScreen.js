@@ -14,8 +14,7 @@ export default function HomeScreen({navigation}) {
   const DECKS = useSelector(state => state.decks);
   const decks = Object.values(DECKS);
   const handleDeckNavigation = deck => {
-    navigation.navigate('DeckList', {title: deck.title});
-    console.log('the deck -->', deck);
+    navigation.navigate('DeckDetails', {title: deck});
   };
   return (
     <View>

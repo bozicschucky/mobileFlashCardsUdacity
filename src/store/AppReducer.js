@@ -32,6 +32,15 @@ const appSlice = createSlice({
   name: 'app',
   initialState,
   reducers: {},
+  extraReducers: {
+    ADD_CARD: (state, action) => {
+      const {title, question, answer} = action.payload;
+      state.decks[title] = {
+        title,
+        questions: [...state.decks[title].questions, {question, answer}],
+      };
+    },
+  },
 });
 
 export default appSlice.reducer;
