@@ -11,36 +11,40 @@ export default function Quiz(props) {
   const [showFinalMessage, setShowFinalMessage] = useState(false);
   const questions = useSelector(state => state.decks[title].questions);
   const totalQuestions = questions.length;
-  const [Answer, setAnswer] = useState(questions[questionIndex]['question']);
+
+  const [Answer, setAnswer] = useState(
+    questions[questionIndex] && questions[questionIndex]['question'],
+  );
   const handleShowAnswer = answer => {
     if (answer === 'answer') {
-      setAnswer(questions[questionIndex]['answer']);
+      setAnswer(questions[questionIndex] && questions[questionIndex]['answer']);
       setShowQuestion(true);
     } else {
-      setAnswer(questions[questionIndex]['question']);
+      setAnswer(
+        questions[questionIndex] && questions[questionIndex]['question'],
+      );
       setShowQuestion(false);
     }
   };
 
   const handleCorrectClick = correctness => {
-    let qtnIndex = questionIndex;
-    qtnIndex++;
-    if (qtnIndex <= totalQuestions - 1) {
+    if (questionIndex <= totalQuestions - 1) {
       if (correctness === 'correct') {
         setCorrectAnswers(correctAnswers + 1);
-        setQuestionIndex(qtnIndex);
+        setQuestionIndex(questionIndex + 1);
       } else {
-        setQuestionIndex(qtnIndex);
+        setQuestionIndex(questionIndex + 1);
       }
-    } else {
-      setShowFinalMessage(true);
+      if (questionIndex === totalQuestions - 1) {
+        setShowFinalMessage(true);
+      }
     }
   };
   return (
     <View style={gameStyles.container}>
       <View>
         <Text>
-          {questionIndex + 1}/{totalQuestions}{' '}
+          {questionIndex}/{totalQuestions}{' '}
         </Text>
         <Text>{correctAnswers}</Text>
         <Text>{Answer}</Text>
@@ -48,8 +52,7 @@ export default function Quiz(props) {
           <View>
             <Text>QUIZ COMPLETED !! </Text>
             <Text>
-              correctPercentage{' '}
-              {computePercentage(correctAnswers, totalQuestions)}%
+              Correct Quiz: {computePercentage(correctAnswers, totalQuestions)}%
             </Text>
           </View>
         ) : (
