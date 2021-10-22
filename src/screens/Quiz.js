@@ -44,9 +44,9 @@ export default function Quiz(props) {
     <View style={gameStyles.container}>
       <View>
         <Text>
-          {questionIndex}/{totalQuestions}{' '}
+          {questionIndex}/{totalQuestions} Questions
         </Text>
-        <Text>{correctAnswers}</Text>
+        <Text>{correctAnswers} Correct Answers</Text>
         <Text>{Answer}</Text>
         {showFinalMessage ? (
           <View>
