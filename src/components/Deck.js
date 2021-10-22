@@ -1,6 +1,7 @@
 import React from 'react';
 import {useDispatch} from 'react-redux';
-import {View, Text, StyleSheet, TouchableHighlight, Button} from 'react-native';
+import {View, StyleSheet} from 'react-native';
+import {Button, Card, Paragraph, Divider} from 'react-native-paper';
 
 export default function Deck(props) {
   const dispatch = useDispatch();
@@ -16,16 +17,22 @@ export default function Deck(props) {
   };
   return (
     <View>
-      <TouchableHighlight
-        onPress={() => {
-          props.handleDeckNavigation(props.name);
-        }}>
-        <View style={styles.container}>
-          <Text style={styles.text}>{name}</Text>
-          <Text style={styles.text}>{cardNumber} Cards</Text>
-        </View>
-      </TouchableHighlight>
-      <Button title="Delete" onPress={deleteDeck} color="red" />
+      <Card mode="outlined">
+        <Card.Title title={name} />
+        <Card.Content>
+          <Paragraph>{cardNumber} cards</Paragraph>
+        </Card.Content>
+        <Card.Actions>
+          <Button onPress={deleteDeck}>Delete</Button>
+          <Button
+            onPress={() => {
+              props.handleDeckNavigation(props.name);
+            }}>
+            Details
+          </Button>
+        </Card.Actions>
+      </Card>
+      <Divider />
     </View>
   );
 }

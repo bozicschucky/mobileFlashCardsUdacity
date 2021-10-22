@@ -1,6 +1,7 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
-import {View, StyleSheet, Button, FlatList} from 'react-native';
+import {View, StyleSheet, FlatList} from 'react-native';
+import {Button} from 'react-native-paper';
 import Deck from '../components/Deck';
 
 export default function HomeScreen({navigation}) {
@@ -28,25 +29,39 @@ export default function HomeScreen({navigation}) {
     />
   );
   return (
-    <View>
-      <View style={styles.decksContainer}>
+    <View style={styles.container}>
+      <View style={styles.container}>
         <View style={styles.button}>
-          <Button title="Add Deck" onPress={handleAddNewDeck} />
+          <Button
+            onPress={handleAddNewDeck}
+            raised
+            theme={{roundness: 6}}
+            mode="contained"
+            dark>
+            Add Deck
+          </Button>
         </View>
-        <FlatList data={formattedDecksData} renderItem={renderDeck} />
+        <FlatList
+          data={formattedDecksData}
+          keyExtractor={item => item.id}
+          renderItem={renderDeck}
+        />
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  statusBarContainer: {
-    backgroundColor: 'purple',
-    height: 50,
+  container: {
+    flex: 1,
   },
   button: {
     marginTop: 10,
     marginBottom: 10,
+    width: '30%',
+    alignItems: 'flex-start',
+    alignContent: 'flex-start',
+    justifyContent: 'flex-start',
   },
 
   statusTitle: {
@@ -54,18 +69,5 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
-  },
-  buttonsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    marginTop: 20,
-    marginRight: 40,
-    paddingRight: 40,
-  },
-  decksContainer: {
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 });
