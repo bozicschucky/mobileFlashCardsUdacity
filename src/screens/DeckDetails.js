@@ -26,7 +26,7 @@ export default function DeckList(props) {
           <Button
             title="Start Quiz"
             onPress={() => {
-              props.navigation.navigate('Quiz', {title});
+              props.navigation.navigate('StartQuiz', {title});
             }}
           />
         </View>

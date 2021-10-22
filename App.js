@@ -16,6 +16,7 @@ import HomeScreen from './src/screens/HomeScreen';
 import DeckDetails from './src/screens/DeckDetails';
 import NewCard from './src/screens/NewCard';
 import NewDeck from './src/screens/NewDeck';
+import Quiz from './src/screens/Quiz';
 
 const Stack = createNativeStackNavigator();
 
@@ -55,6 +56,11 @@ const App = () => {
             name="NewDeck"
             component={NewDeck}
             options={{title: 'Add New Deck'}}
+          />
+          <Stack.Screen
+            name="StartQuiz"
+            component={Quiz}
+            options={{title: 'Quiz'}}
           />
         </Stack.Navigator>
       </NavigationContainer>
