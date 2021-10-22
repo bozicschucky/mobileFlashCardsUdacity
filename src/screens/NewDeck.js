@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
-import {View, Text, TextInput, Button, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
+import {TextInput, Text, Button} from 'react-native-paper';
 
 export default function NewDeck({navigation}) {
   const dispatch = useDispatch();
@@ -16,18 +17,28 @@ export default function NewDeck({navigation}) {
   };
   return (
     <View>
-      <View style={style.container}>
-        <Text style={style.title}>What is the title of the New Deck</Text>
-        <TextInput
-          placeholder="Deck Name"
-          placeholderTextColor="black"
-          onChangeText={handleDeckName}
-        />
-        <Button
-          style={style.button}
-          title="Submit"
-          onPress={handleNewDeckSubmit}
-        />
+      <View>
+        <View style={style.textContainer}>
+          <Text style={style.title}>What is the title of the New Deck</Text>
+          <TextInput
+            mode="flat"
+            placeholder="Deck Name"
+            onChangeText={handleDeckName}
+            style={style.input}
+          />
+        </View>
+        <View style={style.buttonContainer}>
+          <Button
+            title="Submit"
+            theme={{roundness: 6}}
+            raised
+            dark
+            onPress={handleNewDeckSubmit}
+            mode="contained"
+            style={style.button}>
+            Submit
+          </Button>
+        </View>
       </View>
     </View>
   );
@@ -40,15 +51,27 @@ const style = StyleSheet.create({
     width: '100%',
   },
   title: {
-    color: '#000',
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: 'normal',
+    justifyContent: 'center',
+  },
+  textContainer: {
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 5,
+  },
+  input: {
+    width: '70%',
+    marginTop: 20,
   },
   button: {
-    backgroundColor: '#000',
-    color: '#fff',
-    padding: 10,
-    margin: 10,
-    borderRadius: 5,
+    width: '70%',
+    height: 50,
+  },
+  buttonContainer: {
+    paddingTop: 5,
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
 });

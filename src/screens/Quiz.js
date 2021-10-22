@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {useSelector} from 'react-redux';
-import {View, Text, Button, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
+import {Button, Text, Card, Paragraph, Divider} from 'react-native-paper';
 import {computePercentage} from '../utils/helpers';
 
 export default function Quiz(props) {
@@ -41,48 +42,76 @@ export default function Quiz(props) {
     }
   };
   return (
-    <View style={gameStyles.container}>
-      <View>
-        <Text>
-          {questionIndex}/{totalQuestions} Questions
-        </Text>
-        <Text>{correctAnswers} Correct Answers</Text>
-        <Text>{Answer}</Text>
-        {showFinalMessage ? (
-          <View>
-            <Text>QUIZ COMPLETED !! </Text>
-            <Text>
-              Correct Quiz: {computePercentage(correctAnswers, totalQuestions)}%
-            </Text>
-          </View>
-        ) : (
-          <Text></Text>
-        )}
-
-        {/* <View style={gameStyles.container}> */}
+    <View>
+      <View style={gameStyles.container}>
+        <View>
+          <Card mode="outlined" style={gameStyles.card}>
+            <Card.Title subtitle="Select a Question and Answer" />
+            <Card.Content>
+              <Paragraph>
+                {' '}
+                {questionIndex}/{totalQuestions} Questions
+              </Paragraph>
+              {/* <Paragraph>{correctAnswers} Correct Answers</Paragraph> */}
+              <Paragraph>
+                <Text>{Answer}</Text>
+              </Paragraph>
+              <Paragraph></Paragraph>
+              <Paragraph style={{paddingTop: 20}}>
+                {showFinalMessage ? (
+                  <View>
+                    <Paragraph>QUIZ COMPLETED !! </Paragraph>
+                    <Paragraph>
+                      Correct Score:{' '}
+                      {computePercentage(correctAnswers, totalQuestions)}%
+                    </Paragraph>
+                  </View>
+                ) : (
+                  <Paragraph></Paragraph>
+                )}
+              </Paragraph>
+            </Card.Content>
+          </Card>
+          <Divider />
+        </View>
+      </View>
+      <View style={gameStyles.btnContainer}>
         {showQuestion ? (
           <Button
+            dark
             title="Question"
+            mode="contained"
             onPress={() => handleShowAnswer('question')}
-          />
+            style={gameStyles.btn}>
+            Question
+          </Button>
         ) : (
-          <Button title="Answer" onPress={() => handleShowAnswer('answer')} />
+          <Button
+            mode="contained"
+            title="Answer"
+            dark
+            onPress={() => handleShowAnswer('answer')}
+            style={gameStyles.btn}>
+            Answer
+          </Button>
         )}
-        {/* </View> */}
-      </View>
-      <View>
         <Button
-          title="Correct"
+          mode="contained"
+          dark
           onPress={() => {
             handleCorrectClick('correct');
           }}
-        />
+          style={gameStyles.btn}>
+          Correct
+        </Button>
         <Button
-          title="Incorrect"
+          mode="contained"
+          dark
           onPress={() => {
             handleCorrectClick('Incorrect');
-          }}
-        />
+          }}>
+          Incorrect
+        </Button>
       </View>
     </View>
   );
@@ -90,7 +119,20 @@ export default function Quiz(props) {
 
 const gameStyles = StyleSheet.create({
   container: {
+    width: '100%',
+    justifyContent: 'center',
+  },
+  btn: {
+    marginBottom: 10,
+  },
+  btnContainer: {
+    marginTop: 10,
+    flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  card: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

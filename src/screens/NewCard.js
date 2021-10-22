@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
-import {View, TextInput, Button, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
+import {TextInput, Button} from 'react-native-paper';
 export default function NewCard(props) {
   const title = props.route.params.title;
   const navigation = props.navigation;
@@ -21,20 +22,28 @@ export default function NewCard(props) {
   };
 
   return (
-    <View style={styles.container}>
+    <View>
       <View>
         <TextInput
+          mode="flat"
           placeholder="Enter Question"
           onChangeText={handleQuestionInput}
-          placeholderTextColor="black"
         />
         <TextInput
+          mode="flat"
           placeholder="Enter Answer"
           onChangeText={handleAnswerInput}
-          placeholderTextColor="black"
         />
-        <View>
-          <Button title="Submit" onPress={handleNewCardSubmission} />
+        <View style={styles.buttonContainer}>
+          <Button
+            raised
+            dark
+            theme={{roundness: 6}}
+            mode="contained"
+            onPress={handleNewCardSubmission}
+            style={styles.button}>
+            Submit
+          </Button>
         </View>
       </View>
     </View>
@@ -43,6 +52,14 @@ export default function NewCard(props) {
 
 const styles = StyleSheet.create({
   container: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  button: {
+    marginTop: 10,
+    width: '30%',
+  },
+  buttonContainer: {
     justifyContent: 'center',
     alignItems: 'center',
   },

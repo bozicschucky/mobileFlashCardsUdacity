@@ -1,6 +1,7 @@
 import React from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {View, Text, Button, StyleSheet} from 'react-native';
+import {useSelector} from 'react-redux';
+import {View, StyleSheet} from 'react-native';
+import {Button, Card, Paragraph} from 'react-native-paper';
 
 export default function DeckList(props) {
   const params = props.route.params;
@@ -9,26 +10,31 @@ export default function DeckList(props) {
   const numberOfCards = cardDeck.questions.length;
   return (
     <View style={{flex: 1}}>
-      <View style={styles.container}>
-        <Text>{title}</Text>
-        <Text>{numberOfCards} Cards</Text>
-      </View>
+      <Card mode="elevated">
+        <Card.Title title={title} />
+        <Card.Content>
+          <Paragraph>{numberOfCards} cards</Paragraph>
+        </Card.Content>
+      </Card>
       <View style={styles.buttonContainer}>
         <View style={styles.buttonSpacing}>
           <Button
-            title="Add Card"
+            icon="plus"
             onPress={() => {
               props.navigation.navigate('NewCard', {title});
-            }}
-          />
+            }}>
+            New Card
+          </Button>
         </View>
         <View style={styles.buttonSpacing}>
           <Button
+            icon="plus"
             title="Start Quiz"
             onPress={() => {
               props.navigation.navigate('StartQuiz', {title});
-            }}
-          />
+            }}>
+            Start Quiz
+          </Button>
         </View>
       </View>
     </View>
@@ -37,11 +43,8 @@ export default function DeckList(props) {
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 0.5,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 10,
   },
   buttonContainer: {
     paddingTop: 10,

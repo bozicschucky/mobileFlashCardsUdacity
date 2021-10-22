@@ -7,13 +7,25 @@
  */
 
 import React from 'react';
+import {DefaultTheme, Provider as PaperProvider} from 'react-native-paper';
 import {Provider} from 'react-redux';
 import {store} from './src/store';
 import MainComponent from './src/screens/Index';
+
+const theme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: 'tomato',
+    accent: 'yellow',
+  },
+};
 const App = () => {
   return (
     <Provider store={store}>
-      <MainComponent />
+      <PaperProvider theme={theme}>
+        <MainComponent />
+      </PaperProvider>
     </Provider>
   );
 };
