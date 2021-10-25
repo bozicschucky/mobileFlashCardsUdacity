@@ -1,7 +1,15 @@
 import React, {useState} from 'react';
 import {useSelector} from 'react-redux';
 import {View, StyleSheet} from 'react-native';
-import {Button, Text, Card, Paragraph, Divider} from 'react-native-paper';
+import {
+  Button,
+  Text,
+  Card,
+  Paragraph,
+  Dialog,
+  Portal,
+  Divider,
+} from 'react-native-paper';
 import {computePercentage} from '../utils/helpers';
 
 export default function Quiz(props) {
@@ -41,6 +49,17 @@ export default function Quiz(props) {
       }
     }
   };
+  const handleDismissDialog = () => {
+    setCorrectAnswers(0);
+    setQuestionIndex(0);
+    setShowQuestion(true);
+    setShowFinalMessage(false);
+    setAnswer(questions[questionIndex] && questions[questionIndex]['question']);
+  };
+  const cancelDialogDisplay = () => {
+    setShowQuestion(true);
+    setShowFinalMessage(false);
+  };
   return (
     <View>
       <View style={gameStyles.container}>
@@ -52,20 +71,29 @@ export default function Quiz(props) {
                 {' '}
                 {questionIndex}/{totalQuestions} Questions
               </Paragraph>
-              {/* <Paragraph>{correctAnswers} Correct Answers</Paragraph> */}
               <Paragraph>
                 <Text>{Answer}</Text>
               </Paragraph>
               <Paragraph></Paragraph>
               <Paragraph style={{paddingTop: 20}}>
                 {showFinalMessage ? (
-                  <View>
-                    <Paragraph>QUIZ COMPLETED !! </Paragraph>
-                    <Paragraph>
-                      Correct Score:{' '}
-                      {computePercentage(correctAnswers, totalQuestions)}%
-                    </Paragraph>
-                  </View>
+                  <Portal>
+                    <Dialog
+                      visible={showFinalMessage}
+                      onDismiss={handleDismissDialog}>
+                      <Dialog.Title>QUIZ COMPLETED !!</Dialog.Title>
+                      <Dialog.Content>
+                        <Paragraph>
+                          Correct Score:
+                          {computePercentage(correctAnswers, totalQuestions)}%
+                        </Paragraph>
+                      </Dialog.Content>
+                      <Dialog.Actions>
+                        <Button onPress={cancelDialogDisplay}>Cancel</Button>
+                        <Button onPress={handleDismissDialog}>Restart</Button>
+                      </Dialog.Actions>
+                    </Dialog>
+                  </Portal>
                 ) : (
                   <Paragraph></Paragraph>
                 )}
