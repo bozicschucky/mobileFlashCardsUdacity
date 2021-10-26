@@ -9,8 +9,12 @@
 import React from 'react';
 import {DefaultTheme, Provider as PaperProvider} from 'react-native-paper';
 import {Provider} from 'react-redux';
+import {persistStore} from 'redux-persist';
+import {PersistGate} from 'redux-persist/integration/react';
 import {store} from './src/store';
 import MainComponent from './src/screens/Index';
+
+const persistor = persistStore(store);
 
 const theme = {
   ...DefaultTheme,
@@ -23,9 +27,11 @@ const theme = {
 const App = () => {
   return (
     <Provider store={store}>
-      <PaperProvider theme={theme}>
-        <MainComponent />
-      </PaperProvider>
+      <PersistGate persistor={persistor}>
+        <PaperProvider theme={theme}>
+          <MainComponent />
+        </PaperProvider>
+      </PersistGate>
     </Provider>
   );
 };
