@@ -1,6 +1,9 @@
 import {createSlice} from '@reduxjs/toolkit';
 
 const initialState = {
+  firstTimeOpeningApp: true,
+  showNotification: true,
+  notificationShowTime: '',
   decks: {
     React: {
       title: 'React',
@@ -50,6 +53,10 @@ const appSlice = createSlice({
     DELETE_DECK: (state, action) => {
       const {title} = action.payload;
       delete state.decks[title];
+    },
+    SET_NOTIFICATION_TIME: (state, action) => {
+      const {time} = action.payload;
+      state.notificationShowTime = time;
     },
   },
 });

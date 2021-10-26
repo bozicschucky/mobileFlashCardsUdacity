@@ -3,6 +3,7 @@ import {useSelector} from 'react-redux';
 import {View, StyleSheet, FlatList} from 'react-native';
 import {Button} from 'react-native-paper';
 import Deck from '../components/Deck';
+import TimeModal from '../components/TimeModal';
 
 export default function HomeScreen({navigation}) {
   const DECKS = useSelector(state => state.decks);
@@ -31,6 +32,7 @@ export default function HomeScreen({navigation}) {
   return (
     <View style={styles.container}>
       <View style={styles.container}>
+        <TimeModal></TimeModal>
         <View style={styles.button}>
           <Button
             onPress={handleAddNewDeck}
