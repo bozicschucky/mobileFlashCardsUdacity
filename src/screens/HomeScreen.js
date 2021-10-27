@@ -7,6 +7,13 @@ import TimeModal from '../components/TimeModal';
 
 export default function HomeScreen({navigation}) {
   const DECKS = useSelector(state => state.decks);
+  // const notificationTime = useSelector(state => state.notificationShowTime);
+  // const firstTimeOpeningApp = useSelector(state => state.firstTimeOpeningApp);
+  // console.log(
+  //   '🚀 ~ file: HomeScreen.js ~ line 11 ~ HomeScreen ~ notificationTime',
+  //   notificationTime,
+  //   firstTimeOpeningApp,
+  // );
   const decks = Object.values(DECKS);
 
   const formattedDecksData = decks.map(deck => ({
@@ -33,6 +40,7 @@ export default function HomeScreen({navigation}) {
     <View style={styles.container}>
       <View style={styles.container}>
         <TimeModal></TimeModal>
+        {/* {firstTimeOpeningApp && <TimeModal></TimeModal>} */}
         <View style={styles.button}>
           <Button
             onPress={handleAddNewDeck}

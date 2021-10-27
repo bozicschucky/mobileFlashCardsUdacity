@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {View, StyleSheet} from 'react-native';
 import {
   Button,
@@ -14,6 +14,7 @@ import {computePercentage} from '../utils/helpers';
 
 export default function Quiz(props) {
   const title = props.route.params.title;
+  const dispatch = useDispatch();
   const [questionIndex, setQuestionIndex] = useState(0);
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [showQuestion, setShowQuestion] = useState(false);
@@ -60,6 +61,14 @@ export default function Quiz(props) {
     setShowQuestion(true);
     setShowFinalMessage(false);
   };
+
+  if (showFinalMessage) {
+    //whenever a user plays a game we don't have to show trigger notifications
+    dispatch({
+      type: 'SET_SHOW_NOTIFICATION',
+      payload: {showNotification: false},
+    });
+  }
   return (
     <View>
       <View style={gameStyles.container}>
