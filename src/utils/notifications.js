@@ -36,7 +36,7 @@ export async function onCreateTriggerNotification(receivedTime) {
         console.log('time must be from the future', error);
       });
   } catch (error) {
-    console.log('time must be from the future -->', error);
+    // console.log('time must be from the future -->', error);
   }
 }
 
