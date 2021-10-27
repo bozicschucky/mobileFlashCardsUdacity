@@ -1,11 +1,33 @@
 import React from 'react';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {View, StyleSheet, FlatList} from 'react-native';
 import {Button} from 'react-native-paper';
 import Deck from '../components/Deck';
+import TimeModal from '../components/TimeModal';
+import {onCreateTriggerNotification} from '../utils/notifications';
 
 export default function HomeScreen({navigation}) {
   const DECKS = useSelector(state => state.decks);
+  const notificationTime = useSelector(state => state.notificationShowTime);
+  const showNotification = useSelector(state => state.showNotification);
+  const firstTimeOpeningApp = useSelector(state => state.firstTimeOpeningApp);
+  const lastPlayedQuizDate = useSelector(state => state.lastPlayedQuizDate);
+  const dispatch = useDispatch();
+  const dateWhenQuizWasLastPlayed = new Date(
+    lastPlayedQuizDate,
+  ).toLocaleDateString();
+  const currentDate = new Date().toLocaleDateString();
+  if (dateWhenQuizWasLastPlayed !== currentDate) {
+    dispatch({
+      type: 'SET_SHOW_NOTIFICATION',
+      payload: {showNotification: true},
+    });
+  }
+
+  if (showNotification) {
+    onCreateTriggerNotification(notificationTime);
+  }
+
   const decks = Object.values(DECKS);
 
   const formattedDecksData = decks.map(deck => ({
@@ -31,6 +53,7 @@ export default function HomeScreen({navigation}) {
   return (
     <View style={styles.container}>
       <View style={styles.container}>
+        {firstTimeOpeningApp && <TimeModal />}
         <View style={styles.button}>
           <Button
             onPress={handleAddNewDeck}

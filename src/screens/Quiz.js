@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {useSelector} from 'react-redux';
+import React, {useState, useEffect} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
 import {View, StyleSheet} from 'react-native';
 import {
   Button,
@@ -10,10 +10,12 @@ import {
   Portal,
   Divider,
 } from 'react-native-paper';
+import {cancelNotification} from '../utils/notifications';
 import {computePercentage} from '../utils/helpers';
 
 export default function Quiz(props) {
   const title = props.route.params.title;
+  const dispatch = useDispatch();
   const [questionIndex, setQuestionIndex] = useState(0);
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [showQuestion, setShowQuestion] = useState(false);
@@ -24,6 +26,20 @@ export default function Quiz(props) {
   const [Answer, setAnswer] = useState(
     questions[questionIndex] && questions[questionIndex]['question'],
   );
+
+  useEffect(() => {
+    if (showFinalMessage) {
+      //whenever a user plays a game we don't have to show trigger notifications
+      dispatch({
+        type: 'SET_SHOW_NOTIFICATION',
+        payload: {
+          showNotification: false,
+          payQuizDate: `${new Date()}`,
+        },
+      });
+      cancelNotification('daily-remainder');
+    }
+  }, [showFinalMessage]);
   const handleShowAnswer = answer => {
     if (answer === 'answer') {
       setAnswer(questions[questionIndex] && questions[questionIndex]['answer']);
@@ -60,6 +76,7 @@ export default function Quiz(props) {
     setShowQuestion(true);
     setShowFinalMessage(false);
   };
+
   return (
     <View>
       <View style={gameStyles.container}>
