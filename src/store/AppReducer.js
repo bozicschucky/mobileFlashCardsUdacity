@@ -3,7 +3,8 @@ import {createSlice} from '@reduxjs/toolkit';
 const initialState = {
   firstTimeOpeningApp: true,
   showNotification: true,
-  notificationShowTime: new Date(),
+  notificationShowTime: `${new Date()}`,
+  lastPlayedQuizDate: `${new Date()}`,
   decks: {
     React: {
       title: 'React',
@@ -62,6 +63,9 @@ const appSlice = createSlice({
     SET_SHOW_NOTIFICATION: (state, action) => {
       console.log('action -->', action);
       const {showNotification} = action.payload;
+      if (action.payload?.payQuizDate) {
+        state.lastPlayedQuizDate = action.payload?.payQuizDate;
+      }
       state.showNotification = showNotification;
     },
   },

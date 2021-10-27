@@ -15,7 +15,8 @@ export async function onCreateTriggerNotification(receivedTime) {
   // Create a time-based trigger
   const trigger = {
     type: TriggerType.TIMESTAMP,
-    timestamp: currentDate.getTime(), // fire at a set time)
+    timestamp: currentDate.getTime(), // fire at a set time
+    repeatFrequency: 'DAILY', // repeat daily
   };
 
   // Create a trigger notification
@@ -23,8 +24,8 @@ export async function onCreateTriggerNotification(receivedTime) {
     await notifee
       .createTriggerNotification(
         {
-          title: 'Remember to revise your decks',
-          body: `Check out the decks you have to revise ${currentDate.getTime()}`,
+          title: 'Remember to revise your decks 😎👍🙌🐱‍🏍',
+          body: `Check out the decks you have to revise 👀✔✨🐱‍👤`,
           android: {
             channelId: channelId,
           },

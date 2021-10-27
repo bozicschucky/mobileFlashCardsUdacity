@@ -9,7 +9,6 @@ export default function NewDeck({navigation}) {
 
   const handleDeckName = deckName => {
     setDeckName(deckName);
-    console.log(deckName);
   };
   const handleNewDeckSubmit = () => {
     dispatch({type: 'ADD_NEW_DECK', payload: {title: deckName}});
