@@ -12,6 +12,7 @@ This project encompasses the fundamental aspects of building a native applicatio
 - [x] Study flashcards and mark the cards as correct or incorrect.
 - [x] Delete decks and cards.
 - [x] Add new flashcards to decks.
+- [x] Show scheduled App notifications.
 
 ## How to set up the dev environment.
 
