@@ -1,9 +1,13 @@
 import {createSlice} from '@reduxjs/toolkit';
 
+//create date for the next day
+const nextDay = new Date();
+nextDay.setDate(nextDay.getDate() + 1);
+
 const initialState = {
   firstTimeOpeningApp: true,
   showNotification: true,
-  notificationShowTime: `${new Date()}`,
+  notificationShowTime: `${nextDay}`,
   lastPlayedQuizDate: `${new Date()}`,
   decks: {
     React: {

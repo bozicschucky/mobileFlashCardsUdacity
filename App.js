@@ -18,6 +18,7 @@ const persistor = persistStore(store);
 
 const theme = {
   ...DefaultTheme,
+
   colors: {
     ...DefaultTheme.colors,
     primary: 'tomato',

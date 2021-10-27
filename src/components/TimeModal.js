@@ -8,11 +8,17 @@ export default () => {
   const [open, setOpen] = useState(true);
 
   const handleConfirm = date => {
+    const dateToScheduleNotifications = new Date(date);
+    dateToScheduleNotifications.setDate(date.getDate() + 1);
+
     setOpen(false);
     setDate(date);
     dispatch({
       type: 'SET_NOTIFICATION_TIME',
-      payload: {time: `${date}`, firstTimeOpeningApp: false},
+      payload: {
+        time: `${dateToScheduleNotifications}`,
+        firstTimeOpeningApp: false,
+      },
     });
   };
 
